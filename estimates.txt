@@ -1,0 +1,15 @@
+Reference document:
+- https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html
+- https://aws.amazon.com/blogs/database/amazon-rds-under-the-hood-single-az-instance-recovery
+
+1. Minimum RTO for a single AZ outage
+- RTO in this case is normally between 60 and 120 seconds
+
+2. Minimum RTO for a single region outage
+- In this case, RDS needs to launch a new db instance, so it maybe take up to 30 minutes
+
+3. Minimum RPO for a single AZ outage
+- In this case, because we have read replica so the minimum RPO would be zero
+
+4. Minimum RPO for a single region outage
+- In this case, RDS needs to launch a new db instance and applies the latest db backup, so the RPO would be 5 minutes (because the transactional log is updated to S3 every 5 minutes)
